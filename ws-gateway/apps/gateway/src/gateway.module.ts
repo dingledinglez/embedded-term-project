@@ -1,11 +1,21 @@
 import { Module } from '@nestjs/common';
-import { ApplicationModule } from 'apps/application/application.module';
 import { VideoGateway } from 'apps/gateway/src/video/video.gateway';
+import { BullModule } from '@nestjs/bull';
 
 const gateways = [VideoGateway];
 
 @Module({
-  imports: [ApplicationModule],
-  providers: [ApplicationModule, ...gateways],
+  imports: [
+    BullModule.forRoot({
+      redis: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    BullModule.registerQueue({
+      name: 'ai-queue',
+    }),
+  ],
+  providers: [...gateways],
 })
 export class GatewayModule {}

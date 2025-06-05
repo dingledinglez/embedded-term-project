@@ -5,7 +5,8 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
-import { VideoService } from 'apps/application/video/video.service';
+import { InjectQueue } from '@nestjs/bull';
+import { Queue } from 'bull';
 
 @WebSocketGateway({
   cors: { origin: '*' },
@@ -15,7 +16,7 @@ export class VideoGateway {
   @WebSocketServer()
   server: Server;
 
-  constructor(private readonly videoService: VideoService) {}
+  constructor(@InjectQueue('ai-queue') private aiQueue: Queue) {}
 
   @SubscribeMessage('video-stream')
   handleVideoStream(@MessageBody() data: { userId: number; video: Buffer }) {
@@ -24,13 +25,14 @@ export class VideoGateway {
   }
 
   @SubscribeMessage('png')
-  async handlePngUpload(
-    @MessageBody() data: { userId: number; image: Buffer },
-  ) {
-    console.log(`Processing PNG upload for user: ${data.userId}`);
-    const response = await this.videoService.processPng(data.image);
-    this.server
-      .to(String(data.userId))
-      .emit('pose-detection-response', response.data);
+  handlePngUpload(@MessageBody() data: { userId: number; image: Buffer }) {
+    try {
+      this.aiQueue.add('process-png', data);
+    } catch (error) {
+      console.error('PNG 작업 추가 중 오류:', error);
+      this.server
+        .to(String(data.userId))
+        .emit('pose-detection-error', { message: '작업 추가 실패' });
+    }
   }
 }
