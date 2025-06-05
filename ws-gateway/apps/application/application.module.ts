@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 
 import { ConfigModule } from '@nestjs/config';
 import { ApplicationLogger } from 'apps/domain/common/logger/application.logger';
+import { VideoModule } from 'apps/application/video/video.module';
 
-const modules = [];
+const modules = [VideoModule];
 
 @Module({
   imports: [...modules, ConfigModule.forRoot({ isGlobal: true })],
@@ -11,3 +12,4 @@ const modules = [];
   exports: [...modules, ApplicationLogger],
 })
 export class ApplicationModule {}
+
