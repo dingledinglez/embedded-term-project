@@ -9,6 +9,7 @@ import { VideoService } from 'apps/application/video/video.service';
 
 @WebSocketGateway({
   cors: { origin: '*' },
+  namespace: 'video',
 })
 export class VideoGateway {
   @WebSocketServer()
@@ -16,20 +17,20 @@ export class VideoGateway {
 
   constructor(private readonly videoService: VideoService) {}
 
-  @SubscribeMessage('video')
-  handleVideoStream(
-    @MessageBody() { userId, data }: { userId: string; data: Buffer },
-  ): void {
-    console.log(`Streaming video for user: ${userId}`);
-    this.server.to(userId).emit('video', data);
+  @SubscribeMessage('video-stream')
+  handleVideoStream(@MessageBody() data: { userId: number; video: Buffer }) {
+    this.server.socketsJoin(String(data.userId));
+    return this.server.to(String(data.userId)).emit('video-stream', data.video);
   }
 
   @SubscribeMessage('png')
   async handlePngUpload(
-    @MessageBody() { userId, data }: { userId: string; data: Buffer },
-  ): Promise<void> {
-    console.log(`Processing PNG upload for user: ${userId}`);
-    const response = await this.videoService.processPng(data);
-    this.server.to(userId).emit('pose-detection-response', response.data);
+    @MessageBody() data: { userId: number; image: Buffer },
+  ) {
+    console.log(`Processing PNG upload for user: ${data.userId}`);
+    const response = await this.videoService.processPng(data.image);
+    this.server
+      .to(String(data.userId))
+      .emit('pose-detection-response', response.data);
   }
 }
