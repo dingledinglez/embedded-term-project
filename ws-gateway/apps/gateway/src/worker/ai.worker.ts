@@ -2,6 +2,7 @@ import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
 import { Injectable } from '@nestjs/common';
 import { Server } from 'socket.io';
+import * as request from 'request';
 
 @Processor('ai-queue')
 @Injectable()
@@ -18,16 +19,34 @@ export class AiWorker {
     const { userId, image } = job.data;
 
     try {
-      const response = await fetch(this.poseDetectionUrl, {
-        method: 'POST',
-        body: image,
-        headers: { 'Content-Type': 'image/png' },
-      });
+      request.post(
+        {
+          url: this.poseDetectionUrl,
+          formData: {
+            image: {
+              value: Buffer.from(image), // Give your node.js buffer to here
+              options: {
+                filename: 'image.png', // filename
+                contentType: 'image/png', // contentType
+              },
+            },
+          },
+        },
+        (error, http_response) => {
+          if (error) {
+            console.error('PNG 처리 중 오류:', error);
+            this.server
+              .to(String(userId))
+              .emit('pose-detection-error', { message: '처리 실패' });
+            return;
+          }
 
-      this.server
-        .to(String(userId))
-        .emit('pose-detection-result', response.body);
-      console.log(`PNG 처리 완료: ${userId}`);
+          this.server
+            .to(String(userId))
+            .emit('pose-detection-result', JSON.parse(http_response.body));
+          console.log(`PNG 처리 완료: ${userId}`);
+        },
+      );
     } catch (error) {
       console.error('PNG 처리 중 오류:', error);
       this.server
