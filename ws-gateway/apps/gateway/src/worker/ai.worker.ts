@@ -3,6 +3,7 @@ import { Job } from 'bull';
 import { Injectable } from '@nestjs/common';
 import { Server } from 'socket.io';
 import * as request from 'request';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 
 @Processor('ai-queue')
 @Injectable()
@@ -10,7 +11,7 @@ export class AiWorker {
   private readonly poseDetectionUrl = 'http://127.0.0.1:8000/pose-detection';
   private server: Server;
 
-  constructor() {
+  constructor(private readonly eventEmitter: EventEmitter2) {
     this.server = new Server({ cors: { origin: '*' } });
   }
 
@@ -41,9 +42,21 @@ export class AiWorker {
             return;
           }
 
-          this.server
-            .to(String(userId))
-            .emit('pose-detection-result', JSON.parse(http_response.body));
+          console.log('HTTP 응답:', http_response.body);
+
+          const body = JSON.parse(http_response.body);
+
+          if (body.hasOwnProperty('risk')) {
+            this.eventEmitter.emit('new-alarm', 'risk');
+          }
+
+          if (
+            body['prone_status'] === 'Detected' &&
+            body['choking_status'] >= 90
+          ) {
+            this.eventEmitter.emit('new-alarm', 'chocking');
+          }
+
           console.log(`PNG 처리 완료: ${userId}`);
         },
       );

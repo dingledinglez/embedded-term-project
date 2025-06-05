@@ -33,6 +33,16 @@ interface BabyStatisticsTable {
 export type BabyStatistics = Selectable<BabyStatisticsTable>;
 export type NewBabyStatistics = Insertable<BabyStatisticsTable>;
 
+interface RecentActivityTable {
+  id: number;
+  created_at: ColumnType<Date, string | undefined, never>;
+  type: 'ALERT' | 'NOTIFICATION';
+  comment: string;
+}
+
+export type RecentActivity = Selectable<RecentActivityTable>;
+export type NewRecentActivity = Insertable<RecentActivityTable>;
+
 interface NotificationTable {
   id: Generated<number>; // Primary Key
   baby_id: number; // Foreign Key

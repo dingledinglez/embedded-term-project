@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { VideoGateway } from 'apps/gateway/src/video/video.gateway';
 import { BullModule } from '@nestjs/bull';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 const gateways = [VideoGateway];
 
@@ -15,6 +16,7 @@ const gateways = [VideoGateway];
     BullModule.registerQueue({
       name: 'ai-queue',
     }),
+    EventEmitterModule.forRoot(),
   ],
   providers: [...gateways],
 })
