@@ -10,7 +10,7 @@ const httpClient = {
   request: axios.create({
     httpsAgent: new https.Agent({
       rejectUnauthorized: false,
-
+      keepAlive: false,
       // allow legacy server
       secureOptions: crypto.constants.SSL_OP_LEGACY_SERVER_CONNECT,
     }),
