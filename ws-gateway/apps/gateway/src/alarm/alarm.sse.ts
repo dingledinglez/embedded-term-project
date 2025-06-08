@@ -6,6 +6,13 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 export class AlarmSse {
   constructor(private readonly eventEmitter: EventEmitter2) {}
 
+  @Sse('get-audio-alerts')
+  getAudioAlerts(): Observable<{ data: { type: string } }> {
+    return fromEvent(this.eventEmitter, 'new-audio-alarm').pipe(
+        map((_data: string) => ({ data: { type: _data } })),
+    );
+  }
+
   @Sse('get-alarms')
   getAlarms(): Observable<{ data: { type: string } }> {
     return fromEvent(this.eventEmitter, 'new-alarm').pipe(
