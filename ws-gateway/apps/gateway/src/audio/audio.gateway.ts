@@ -20,7 +20,7 @@ export class AudioGateway {
 
   constructor(private readonly eventEmitter: EventEmitter2) {}
 
-  @SubscribeMessage('audio')
+  @SubscribeMessage('cry')
   handleAudio(@MessageBody() data: { userId: number; wav: Buffer }) {
     const { userId, wav } = data;
 
@@ -28,10 +28,9 @@ export class AudioGateway {
       request.post(
         {
           url: this.audioDetectionUrl,
-          accept: 'application/json',
           formData: {
-            audio: {
-              value: Buffer.from(wav),
+            file: {
+              value: wav,
               options: {
                 filename: 'file.wav', // filename
                 contentType: 'audio/wav', // contentType
@@ -45,11 +44,25 @@ export class AudioGateway {
             return;
           }
 
-          console.log('HTTP 응답:', http_response.body);
-
           const body = JSON.parse(http_response.body);
 
-          console.log(body['predicted_class']);
+          switch (body['predicted_class']) {
+            case '불편함':
+              this.eventEmitter.emit('new-audio-alarm', 'discomfort');
+              break;
+            case '배고픔':
+              this.eventEmitter.emit('new-audio-alarm', 'hungry');
+              break;
+            case '트림':
+              this.eventEmitter.emit('new-audio-alarm', 'trim');
+              break;
+            case '복통':
+              this.eventEmitter.emit('new-audio-alarm', 'stomachache');
+              break;
+            case '피로':
+              this.eventEmitter.emit('new-audio-alarm', 'tired');
+              break;
+          }
 
           console.log(`오디오 처리 완료: ${userId}`);
         },
