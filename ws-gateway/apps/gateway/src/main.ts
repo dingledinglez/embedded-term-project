@@ -14,6 +14,6 @@ async function bootstrap() {
 
   app.useLogger(new ApplicationLogger());
 
-  await app.listen(process.env.API_PORT || 3000);
+  await app.listen(process.env.API_PORT || 3001);
 }
 bootstrap();

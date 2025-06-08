@@ -2,8 +2,10 @@ import { Module } from '@nestjs/common';
 import { VideoGateway } from 'apps/gateway/src/video/video.gateway';
 import { BullModule } from '@nestjs/bull';
 import { EventEmitterModule } from '@nestjs/event-emitter';
+import { AudioGateway } from "apps/gateway/src/audio/audio.gateway";
+import { AlarmSse } from "apps/gateway/src/alarm/alarm.sse";
 
-const gateways = [VideoGateway];
+const gateways = [VideoGateway,AudioGateway, AlarmSse];
 
 @Module({
   imports: [
