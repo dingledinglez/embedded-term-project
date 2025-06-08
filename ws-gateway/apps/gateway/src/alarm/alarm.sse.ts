@@ -9,7 +9,7 @@ export class AlarmSse {
   @Sse('get-cry-alerts')
   getAudioAlerts(): Observable<{ data: { type: string } }> {
     return fromEvent(this.eventEmitter, 'new-audio-alarm').pipe(
-        map((_data: string) => ({ data: { type: _data } })),
+      map((_data: any) => ({ data: _data })),
     );
   }
 

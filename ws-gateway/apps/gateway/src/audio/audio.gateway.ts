@@ -48,19 +48,34 @@ export class AudioGateway {
 
           switch (body['predicted_class']) {
             case '불편함':
-              this.eventEmitter.emit('new-audio-alarm', 'discomfort');
+              this.eventEmitter.emit('new-audio-alarm', {
+                type: 'discomfort',
+                data: body,
+              });
               break;
             case '배고픔':
-              this.eventEmitter.emit('new-audio-alarm', 'hungry');
+              this.eventEmitter.emit('new-audio-alarm', {
+                type: 'hungry',
+                data: body,
+              });
               break;
             case '트림':
-              this.eventEmitter.emit('new-audio-alarm', 'trim');
+              this.eventEmitter.emit('new-audio-alarm', {
+                type: 'trim',
+                data: body,
+              });
               break;
             case '복통':
-              this.eventEmitter.emit('new-audio-alarm', 'stomachache');
+              this.eventEmitter.emit('new-audio-alarm', {
+                type: 'stomachache',
+                data: body,
+              });
               break;
             case '피로':
-              this.eventEmitter.emit('new-audio-alarm', 'tired');
+              this.eventEmitter.emit('new-audio-alarm', {
+                type: 'tired',
+                data: body,
+              });
               break;
           }
 
