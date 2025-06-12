@@ -16,7 +16,7 @@ export class AudioGateway {
   @WebSocketServer()
   server: Server;
 
-  private readonly audioDetectionUrl = 'http://127.0.0.1:8000/cry-detection';
+  private readonly audioDetectionUrl = 'http://127.0.0.1:3001/cry-detection';
 
   constructor(private readonly eventEmitter: EventEmitter2) {}
 

@@ -16,6 +16,6 @@ async function bootstrap() {
   app.useLogger(new ApplicationLogger());
   app.useWebSocketAdapter(new CustomIoAdapter(app));
 
-  await app.listen(process.env.API_PORT || 3001);
+  await app.listen(process.env.API_PORT || 8001);
 }
 bootstrap();

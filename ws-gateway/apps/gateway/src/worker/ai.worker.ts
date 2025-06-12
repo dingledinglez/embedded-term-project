@@ -8,7 +8,7 @@ import { EventEmitter2 } from '@nestjs/event-emitter';
 @Processor('ai-queue')
 @Injectable()
 export class AiWorker {
-  private readonly poseDetectionUrl = 'http://127.0.0.1:8000/pose-detection';
+  private readonly poseDetectionUrl = 'http://127.0.0.1:3001/pose-detection';
   private server: Server;
 
   constructor(private readonly eventEmitter: EventEmitter2) {
