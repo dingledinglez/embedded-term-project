@@ -1,9 +1,9 @@
 package bbangbbangz.baby_monitoring_system.repository;
 
+import bbangbbangz.baby_monitoring_system.domain.Notification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import bbangbbangz.baby_monitoring_system.domain.TestEntity;
 
 @Repository
-public interface TestRepository extends JpaRepository<TestEntity, Long> {
+public interface NotificationRepository extends JpaRepository<Notification, Long> {
 }
