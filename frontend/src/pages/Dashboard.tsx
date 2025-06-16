@@ -7,7 +7,6 @@ import RecordButton from '@/assets/dashboardButton/recordButton.svg';
 import RecordButtonActive from '@/assets/dashboardButton/recordButtonActive.svg';
 import SongButton from '@/assets/dashboardButton/songButton.svg';
 import SongButtonActive from '@/assets/dashboardButton/songButtonActive.svg';
-import httpClient from '@/lib/client/http-client';
 import music from '@/assets/music/good-night-melody-piano-245836.mp3'
 import axios from 'axios';
 import CustomScrollbar from '@/components/ui/CustomScrollbar';
@@ -38,13 +37,13 @@ const Dashboard = () => {
     setIsPlaying(false);
   };
 
-  
+
   const today = new Date(); // 오늘 날짜
 
   /* 데이터 가져오기 */
   useEffect(() => {
     fetchData(today);
-  }, []); // 날짜가 바뀔 때마다 데이터를 가져옴
+  }, [today]); // 날짜가 바뀔 때마다 데이터를 가져옴
 
   const fetchData = async (date: Date) => {
     try {
@@ -53,7 +52,7 @@ const Dashboard = () => {
       const data = response.data;
 
 
-      
+
     } catch (error: any) {
       console.error("데이터를 가져오는 중 오류 발생:", error.message);
     }
@@ -61,7 +60,7 @@ const Dashboard = () => {
 
   //녹음 기능
   const handleRecordClick = async () => {
-    
+
     setIsModalOpen(true);
     // 상태 토글
     setIsRecording((prev) => !prev);
@@ -168,7 +167,7 @@ const Dashboard = () => {
       {showAlerts && (
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
           <div className="w-[350px] bg-white p-5 rounded-lg shadow-lg h-[600px]">
-            
+
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-bold">전체 알림</h3>
               <button
