@@ -3,10 +3,11 @@ import './index.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import LoginPage from '@/pages/LoginPage.tsx';
 import MainPage from '@/pages/MainPage.tsx';
-
 import MonitorFrequencyPage from '@/pages/MonitorFrequncyPage.tsx';
 import Dashboard from '@/pages/Dashboard.tsx';
 import ScanPage from '@/pages/ScanPage.tsx';
@@ -17,8 +18,6 @@ import Onboarding from '@/pages/Onboarding.tsx';
 import StartSignupForm from '@/pages/StartSignupForm.tsx';
 import MonitorPosePage from './pages/MonitorPosePage';
 import AudioPage from '@/pages/AudioPage.tsx';
-import { ToastContainer } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 
 const queryClient = new QueryClient();
