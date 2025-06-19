@@ -33,7 +33,7 @@ Dingle-Dingle is an AI-powered smart baby monitoring application designed to kee
 - Docker Compose
 - AWS EC2, S3, RDS, CodeDeploy, CloudFront
 
-## Project Structure
+## 🏗 Project Structure
 ```text
 .
 ├── README.md
