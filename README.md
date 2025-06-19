@@ -1,5 +1,4 @@
 # Dingle-Dingle: A Relaxing Night with Dingle
-![App Screenshot](https://github.com/user-attachments/assets/0c798f0d-7176-435d-9cf2-7d7d0b1b3515)
 <img width="1515" alt="스크린샷 2025-06-19 오후 11 14 05" src="https://github.com/user-attachments/assets/e1dca51b-b70b-4849-b335-1a4d33b54322" />
 
 ## 📚 Introduction
@@ -11,7 +10,7 @@ Dingle-Dingle is an AI-powered smart baby monitoring application designed to kee
 - **Daily Statistics**: Provides parents with visual summaries and analytics of their baby's crying patterns and posture data over time.  
 
 ## 📢 System Architecture
-![Architecture Diagram](https://github.com/user-attachments/assets/ac590bf7-5c3f-4df1-a14d-40f7176704bd)
+<img width="1109" alt="스크린샷 2025-06-19 오후 11 15 32" src="https://github.com/user-attachments/assets/66dbcd39-de29-4048-b56a-ab567567f238" />
 
 ## 💻 Development Tech Stack
 ### **Frontend**
