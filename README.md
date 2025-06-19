@@ -14,15 +14,18 @@ Dingle-Dingle is an AI-powered smart baby monitoring application designed to kee
 
 ## 💻 Development Tech Stack
 ### **Frontend**
-- React 
-- TypeScript
-- Vite
+- React : Base UI Library 
+- TypeScript : Type-safe Langauge
+- Vite : Fast and light weight build tools
+- TailwindCSS : Opensource CSS Framework
+- lucide-react : React icon componenet library
+- zustand : React state management 
 ### **Backend** 
-- Spring Boot, Java
-- NestJS, TypeScript
+- Spring Boot, Java : Used for api server framework
+- NestJS, TypeScript : Used for SSE gateway
 ### **Database**
-- MySQL
-- Redis
+- MySQL : Relational Database System
+- Redis : Used as Cache
 ### **AI** 
 - Python
 - Fastapi
@@ -102,6 +105,9 @@ Dingle-Dingle is an AI-powered smart baby monitoring application designed to kee
     ├── tsconfig.build.json
     └── tsconfig.json
 ```
+## 🏛️ DB ERD
+![db](https://github.com/user-attachments/assets/61d1adfb-783f-49f4-bcc8-da462f435103)
+
 
 ## 🎞️ Demo Video
 Watch the live demonstration here: [Demo Video](https://github.com/user-attachments/assets/10213c31-4f4d-4e96-b0c9-1e4329925902)
