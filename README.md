@@ -1,5 +1,6 @@
 # Dingle-Dingle: A Relaxing Night with Dingle
 ![App Screenshot](https://github.com/user-attachments/assets/0c798f0d-7176-435d-9cf2-7d7d0b1b3515)
+<img width="1515" alt="스크린샷 2025-06-19 오후 11 14 05" src="https://github.com/user-attachments/assets/e1dca51b-b70b-4849-b335-1a4d33b54322" />
 
 ## 📚 Introduction
 Dingle-Dingle is an AI-powered smart baby monitoring application designed to keep infants safe and give parents peace of mind during the night. By combining CNN-based cry analysis and real-time pose estimation, the system detects different types of baby cries and monitors posture to prevent choking and falls.
