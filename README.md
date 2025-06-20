@@ -110,7 +110,7 @@ Dingle-Dingle is an AI-powered smart baby monitoring application designed to kee
 
 
 ## 🎞️ Demo Video
-Watch the live demonstration here: [Demo Video](https://github.com/user-attachments/assets/10213c31-4f4d-4e96-b0c9-1e4329925902)
+Watch the live demonstration here: [Video](https://youtu.be/YCgK8OtZoHo)
 
 ## 📊 Training Data Source
 - **Cry Analysis Dataset**: [Baby Cry Classification](https://www.kaggle.com/datasets/bhoomikavalani/donateacrycorpusfeaturesdataset) – 5 000 labeled audio clips spanning five cry types *(hunger, discomfort, burping, pain, fatigue).*  
